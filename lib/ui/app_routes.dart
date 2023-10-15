@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:paradoxs_coffee/ui/home/home_screen.dart';
+import 'package:paradoxs_coffee/ui/splash/splash_screen.dart';
 
 class RouteNames {
-  static const String homeScreen = "/";
+  static const String homeScreen = "/home";
+  static const String splashScreen = "/";
 }
 
 class AppRoutes {
@@ -11,6 +13,10 @@ class AppRoutes {
       case RouteNames.homeScreen:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+      case RouteNames.splashScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
         );
       default:
         return MaterialPageRoute(

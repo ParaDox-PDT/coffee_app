@@ -10,8 +10,8 @@ class AppTheme {
     appBarTheme:  AppBarTheme(
       elevation: 0,
       backgroundColor: AppColors.textColor,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColors.textColor,
+      systemOverlayStyle:const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
       ),
