@@ -5,15 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'colors.dart';
 
 class AppTheme {
-  static ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.black,
-    appBarTheme: const AppBarTheme(
+  static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.textColor,
+    appBarTheme:  AppBarTheme(
       elevation: 0,
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.textColor,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColors.black,
+        statusBarColor: AppColors.textColor,
         statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
       ),
     ),
     textTheme: TextTheme(
@@ -22,82 +22,82 @@ class AppTheme {
           color: AppColors.textColor,
           fontSize: 57.sp,
           fontWeight: FontWeight.w800,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       displayMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 45.sp,
           fontWeight: FontWeight.w700,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       displaySmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 36.sp,
           fontWeight: FontWeight.w600,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       //headline
       headlineLarge: TextStyle(
           color: AppColors.textColor,
           fontSize: 32.sp,
           fontWeight: FontWeight.w700,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       headlineMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 28.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       headlineSmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 24.sp,
           fontWeight: FontWeight.w400,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       //title
       titleLarge: TextStyle(
           color: AppColors.textColor,
           fontSize: 22.sp,
           fontWeight: FontWeight.w700,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       titleMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       titleSmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       //label
       labelLarge: TextStyle(
           color: AppColors.textColor,
           fontSize: 14.sp,
           fontWeight: FontWeight.w600,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       labelMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 12.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       labelSmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 11.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       //body
       bodySmall: const TextStyle(
           color: AppColors.passiveTextColor,
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
       bodyMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Poppins"),
       bodyLarge: TextStyle(
           color: AppColors.textColor,
           fontSize: 12.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Lato"),
+          fontFamily: "Sora"),
     ),
   );
-  static ThemeData lightTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData();
 }

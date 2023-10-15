@@ -1,4 +1,4 @@
-name: flutter_defualt_project
+name: paradoxs_coffee
 description: A new Flutter project.
 
 publish_to: 'none'
@@ -14,23 +14,26 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.6
+  change_app_package_name: ^1.1.0
   flutter_svg: ^2.0.6
   zoom_tap_animation: ^1.1.0
-  flutter_screenutil: ^5.8.4
-  change_app_package_name: ^1.1.0
+  flutter_screenutil: ^5.9.0
   easy_localization: ^3.0.2
   shared_preferences: ^2.1.2
-  http: ^1.1.0
   url_launcher: ^6.1.11
   cached_network_image: ^3.2.3
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  hive_generator: ^2.0.0
-  sqflite: ^2.2.8+4
+  sqflite: ^2.3.0
   path_provider: ^2.0.15
   path: ^1.8.3
+  image_picker: ^1.0.4
   mask_text_input_formatter: ^2.4.0
+  flutter_bloc: ^8.1.3
+  equatable: ^2.0.5
+  firebase_core: ^2.16.0
+  firebase_storage: ^11.2.7
+  cloud_firestore: ^4.9.2
+  dio: ^5.3.2
 
 dev_dependencies:
   flutter_test:
@@ -52,24 +55,13 @@ flutter:
 
 
   fonts:
-    - family: Poppins
+    - family: Sora
       fonts:
-        - asset: assets/fonts/Poppins/Montserrat-Black.ttf
-        - asset: assets/fonts/Poppins/Montserrat-BlackItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Bold.ttf
-        - asset: assets/fonts/Poppins/Montserrat-BoldItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-ExtraBold.ttf
-        - asset: assets/fonts/Poppins/Montserrat-ExtraBoldItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-ExtraLight.ttf
-        - asset: assets/fonts/Poppins/Montserrat-ExtraLightItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Italic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Light.ttf
-        - asset: assets/fonts/Poppins/Montserrat-LightItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Medium.ttf
-        - asset: assets/fonts/Poppins/Montserrat-MediumItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Regular.ttf
-        - asset: assets/fonts/Poppins/Montserrat-SemiBold.ttf
-        - asset: assets/fonts/Poppins/Montserrat-SemiBoldItalic.ttf
-        - asset: assets/fonts/Poppins/Montserrat-Thin.ttf
-        - asset: assets/fonts/Poppins/Montserrat-ThinItalic.ttf
-          style: italic
+        - asset: assets/fonts/Sora/Sora-Bold.ttf
+        - asset: assets/fonts/Sora/Sora-ExtraBold.ttf
+        - asset: assets/fonts/Sora/Sora-ExtraLight.ttf
+        - asset: assets/fonts/Sora/Sora-Light.ttf
+        - asset: assets/fonts/Sora/Sora-Medium.ttf
+        - asset: assets/fonts/Sora/Sora-Regular.ttf
+        - asset: assets/fonts/Sora/Sora-SemiBold.ttf
+        - asset: assets/fonts/Sora/Sora-Thin.ttf

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_defualt_project/ui/home/home_screen.dart';
+import 'package:paradoxs_coffee/ui/home/home_screen.dart';
 
 class RouteNames {
   static const String homeScreen = "/";
