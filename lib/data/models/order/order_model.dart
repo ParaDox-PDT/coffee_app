@@ -4,7 +4,7 @@ class OrderModel {
   final String createdAt;
   final String orderId;
   final String phoneNumber;
-  final List<String> productsId;
+  final List<Map<String,dynamic>> products;
   final double totalPrice;
   final String username;
   final String status;
@@ -16,7 +16,7 @@ class OrderModel {
       required this.comment,
       required this.orderId,
       required this.phoneNumber,
-      required this.productsId,
+      required this.products,
       required this.totalPrice,
       required this.username,required this.status,required this.userId});
 
@@ -24,7 +24,7 @@ class OrderModel {
     double? totalPrice,
     String? orderId,
     String? status,
-    List<String>? productsId,
+    List<Map<String,dynamic>>? products,
     String? username,
     String? comment,
     String? createdAt,
@@ -33,7 +33,7 @@ class OrderModel {
     String? userId,
   }) =>
       OrderModel(
-        productsId: productsId ?? this.productsId,
+        products: products ?? this.products,
         totalPrice: totalPrice ?? this.totalPrice,
         orderId: orderId ?? this.orderId,
         status: status ?? this.status,
@@ -52,7 +52,7 @@ class OrderModel {
       orderId: jsonData['orderId'] as String? ?? '',
       comment: jsonData['comment'] as String? ?? '',
       status: jsonData['status'] as String? ?? '',
-      productsId: jsonData['productsId'] as List<String>? ?? [],
+      products: jsonData['products'] as List<Map<String,dynamic>>? ?? [],
       address: jsonData['address'] as String? ?? '',
       phoneNumber: jsonData['phoneNumber'] as String? ?? '',
       userId: jsonData['userId'] as String? ?? '',
@@ -68,7 +68,7 @@ class OrderModel {
       'orderId': orderId,
       'userId': userId,
       'comment': comment,
-      'productsId': productsId,
+      'products': products,
       'address': address,
       'createdAt': createdAt,
       'phoneNumber': phoneNumber
@@ -84,7 +84,7 @@ class OrderModel {
       status: $status,
       orderId: $orderId,
       comment: $comment,
-      productsId: $productsId,
+      productsId: $products,
       address: $address,
       createdAt: $createdAt,
       phoneNumber: $phoneNumber,

@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paradoxs_coffee/data/firebase_service/order_service.dart';
 import 'package:paradoxs_coffee/data/models/order/order_model.dart';
 import 'package:paradoxs_coffee/data/models/universal_data.dart';
+import 'package:paradoxs_coffee/data/repositories/order_repo/order_repo.dart';
 
 
 
@@ -15,18 +15,18 @@ part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
-  OrderBloc({required this.orderService}) : super(OrderInitial()) {
+  OrderBloc({required this.orderRepo}) : super(OrderInitial()) {
     on<AddOrderEvent>(addOrder);
     on<DeleteOrderEvent>(deleteOrder);
     on<GetOrderEvent>(listenOrders);
   }
 
-  final OrderService orderService;
+  final OrderRepo orderRepo;
   List<OrderModel> userOrders=[];
 
   Future<void> addOrder(AddOrderEvent event,Emitter<OrderState> emit)async{
     emit(OrderLoadingState());
-    UniversalData universalData  = await orderService.addOrder(orderModel: event.orderModel);
+    UniversalData universalData  = await orderRepo.addOrder(orderModel: event.orderModel);
     if(universalData.error.isNotEmpty){
       emit(OrderErrorState(errorText: universalData.error));
     }
@@ -38,7 +38,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   Future<void> deleteOrder(DeleteOrderEvent event,Emitter<OrderState> emit)async{
     emit(OrderLoadingState());
-    UniversalData universalData = await orderService.deleteOrder(orderId: event.orderId);
+    UniversalData universalData = await orderRepo.deleteOrder(orderId: event.orderId);
     if(universalData.error.isNotEmpty){
       emit(OrderErrorState(errorText: universalData.error));
     }

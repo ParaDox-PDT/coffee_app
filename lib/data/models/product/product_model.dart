@@ -5,7 +5,6 @@ class ProductModel {
   final String description;
   final double price;
   final String productId;
-  final int count;
 
   ProductModel(
       {required this.categoryId,
@@ -13,8 +12,7 @@ class ProductModel {
       required this.name,
       required this.description,
       required this.photoUrl,
-      required this.productId,
-      required this.count});
+      required this.productId,});
 
   ProductModel copyWith({
     double? price,
@@ -27,7 +25,6 @@ class ProductModel {
   }) {
     return ProductModel(
       price: price ?? this.price,
-      count: count ?? this.count,
       photoUrl: photoUrl ?? this.photoUrl,
       categoryId: categoryId ?? this.categoryId,
       productId: productId ?? this.productId,
@@ -38,7 +35,6 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
     return ProductModel(
-      count: jsonData['count'] as int? ?? 0,
       price: jsonData['price'] as double? ?? 0,
       photoUrl: (jsonData['photoUrl'] as String? ?? ""),
       categoryId: jsonData['categoryId'] as String? ?? '',
@@ -50,7 +46,6 @@ class ProductModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'count':count,
       'price': price,
       'photoUrl': photoUrl,
       'categoryId': categoryId,
@@ -63,7 +58,6 @@ class ProductModel {
   @override
   String toString() {
     return '''
-      count: $count,
       price: $price,
       photoUrl: $photoUrl,
       categoryId: $categoryId,

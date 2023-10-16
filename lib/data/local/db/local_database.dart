@@ -1,153 +1,158 @@
-
+import 'package:paradoxs_coffee/data/models/product/product_model_for_sql.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../models/default_model.dart';
 
-class LocalDatabase{
+class LocalDatabase {
   static final LocalDatabase getInstance = LocalDatabase._init();
 
   LocalDatabase._init();
 
-  factory LocalDatabase(){
+  factory LocalDatabase() {
     return getInstance;
   }
 
   static Database? _database;
 
-  Future<Database> get database async{
-    if(_database !=null){
+  Future<Database> get database async {
+    if (_database != null) {
       return _database!;
-    }else{
-      _database = await _initDB("defaultDatabase.db");
+    } else {
+      _database = await _initDB("coffee.db");
       return _database!;
     }
   }
 
-  Future<Database> _initDB(String dbName)async{
+  Future<Database> _initDB(String dbName) async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath,dbName);
-    return await openDatabase(path,version: 1,onCreate: _createDB);
+    final path = join(dbPath, dbName);
+    return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
-  Future _createDB(Database db, int version)async{
+  Future _createDB(Database db, int version) async {
     const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
     const textType = "TEXT NOT NULL";
     const intType = "INTEGER DEFAULT 0";
 
+    await db.execute('''
+    CREATE TABLE ${ProductModelFields.tableName} (
+    ${ProductModelFields.id} $idType,
+    ${ProductModelFields.productId} $intType,
+    ${ProductModelFields.price} $intType,
+    ${ProductModelFields.count} $intType,
+    ${ProductModelFields.name} $textType,
+    ${ProductModelFields.photoUrl} $textType,
+    ${ProductModelFields.categoryId} $textType,
+    ${ProductModelFields.description} $textType
+    );
+    ''');
 
     await db.execute('''
-    CREATE TABLE ${DefaultModelFields.defaultTable}(
-    ${DefaultModelFields.id} $idType,
-    ${DefaultModelFields.id} $intType,
-    ${DefaultModelFields.name} $textType,
-    )
+    CREATE TABLE ${ProductModelFields.favorites} (
+    ${ProductModelFields.id} $idType,
+    ${ProductModelFields.productId} $intType,
+    ${ProductModelFields.price} $intType,
+    ${ProductModelFields.count} $intType,
+    ${ProductModelFields.name} $textType,
+    ${ProductModelFields.photoUrl} $textType,
+    ${ProductModelFields.categoryId} $textType,
+    ${ProductModelFields.description} $textType
+    );
     ''');
   }
 
-  static Future<DefaultModel> insertContact(
-      DefaultModel defaultModel) async {
+  //-------------------Cart Products------------------------
+
+  static Future<ProductModelForSql> insertProduct(
+      ProductModelForSql productModelForSql) async {
     final db = await getInstance.database;
     final int id = await db.insert(
-        DefaultModelFields.defaultTable, defaultModel.toJson());
-    return defaultModel.copyWith(id: id);
+        ProductModelFields.tableName, productModelForSql.toJson());
+    return productModelForSql.copyWith(id: id);
   }
 
-  static Future<List<DefaultModel>> getAllContacts() async {
-    List<DefaultModel> allInfo = [];
+  static Future<List<ProductModelForSql>> getAllProducts() async {
+    List<ProductModelForSql> allProducts = [];
     final db = await getInstance.database;
-    allInfo = (await db.query(DefaultModelFields.defaultTable))
-        .map((e) => DefaultModel.fromJson(e))
+    allProducts = (await db.query(ProductModelFields.tableName))
+        .map((e) => ProductModelForSql.fromJson(e))
         .toList();
-
-    return allInfo;
+    return allProducts;
   }
 
-  static Future<List<DefaultModel>> getContactsByAlphabet(
-      String order) async {
-    List<DefaultModel> allToDos = [];
+  static Future<bool> checkProduct({required int id})async{
     final db = await getInstance.database;
-    allToDos = (await db.query(DefaultModelFields.defaultTable,
-        orderBy: "${DefaultModelFields.name} $order"))
-        .map((e) => DefaultModel.fromJson(e))
-        .toList();
-    return allToDos;
-  }
-
-  static updateContactName({required int id, required String name}) async {
-    final db = await getInstance.database;
-    db.update(
-      DefaultModelFields.defaultTable,
-      {DefaultModelFields.name: name},
-      where: "${DefaultModelFields.id} = ?",
+    List<Map<String, dynamic>> result = await db.query(
+      ProductModelFields.tableName,
+      where: '${ProductModelFields.productId} = ? ',
       whereArgs: [id],
     );
+    return result.isNotEmpty;
   }
 
-  static updateInfo({required DefaultModel defaultModel}) async {
+  static incrementProduct({required int id}) async {
     final db = await getInstance.database;
-    db.update(
-      DefaultModelFields.defaultTable,
-      defaultModel.toJson(),
-      where: "${DefaultModelFields.id} = ?",
-      whereArgs: [defaultModel.id],
-    );
+    await db.execute(
+        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} + 1 WHERE ${ProductModelFields.productId} = $id;");
   }
 
-  static deleteContact(int id) async {
+  static decrementProduct({required int id}) async {
+    final db = await getInstance.database;
+    await db.execute(
+        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} - 1 WHERE ${ProductModelFields.productId} = $id;");
+  }
+
+  static deleteProduct(int id) async {
     final db = await getInstance.database;
     db.delete(
-      DefaultModelFields.defaultTable,
-      where: "${DefaultModelFields.id} = ?",
+      ProductModelFields.tableName,
+      where: "${ProductModelFields.productId} = ?",
       whereArgs: [id],
     );
   }
 
-  static deleteAllInfo() async {
+  static deleteAllProducts() async {
     final db = await getInstance.database;
     db.delete(
-      DefaultModelFields.defaultTable,
+      ProductModelFields.tableName,
     );
   }
 
-  static Future<List<DefaultModel>> getInfoByLimit(int limit) async {
-    List<DefaultModel> allToDos = [];
-    final db = await getInstance.database;
-    allToDos = (await db.query(DefaultModelFields.defaultTable,
-        limit: limit, orderBy: "${DefaultModelFields.name} ASC"))
-        .map((e) => DefaultModel.fromJson(e))
-        .toList();
+  //------------------------Favorites Product--------------------------
 
-    return allToDos;
+  static Future<ProductModelForSql> insertProductToFavorites(
+      ProductModelForSql productModelForSql) async {
+    final db = await getInstance.database;
+    final int id = await db.insert(
+        ProductModelFields.favorites, productModelForSql.toJson());
+    return productModelForSql.copyWith(id: id);
   }
 
-  static Future<DefaultModel?> getSingleContact(int id) async {
-    List<DefaultModel> allInfo = [];
+  static Future<List<ProductModelForSql>> getAllFavorites() async {
+    List<ProductModelForSql> allProducts = [];
     final db = await getInstance.database;
-    allInfo = (await db.query(
-      DefaultModelFields.defaultTable,
-      where: "${DefaultModelFields.id} = ?",
+    allProducts = (await db.query(ProductModelFields.favorites))
+        .map((e) => ProductModelForSql.fromJson(e))
+        .toList();
+    return allProducts;
+  }
+
+  static Future<List<String>> getAllFavoritesId() async {
+    List<String> allID = [];
+    final db = await getInstance.database;
+    allID = (await db.query(ProductModelFields.favorites))
+        .map((e) => ProductModelForSql.fromJson(e).productId.toString())
+        .toList();
+    return allID;
+  }
+
+  static deleteProductFromFavorites(int id) async {
+    final db = await getInstance.database;
+    db.delete(
+      ProductModelFields.favorites,
+      where: "${ProductModelFields.productId} = ?",
       whereArgs: [id],
-    ))
-        .map((e) => DefaultModel.fromJson(e))
-        .toList();
-
-    if (allInfo.isNotEmpty) {
-      return allInfo.first;
-    }
-    return allInfo.last;
+    );
   }
 
-  static Future<List<DefaultModel>> getInfoByQuery(String query) async {
-    List<DefaultModel> allInfo = [];
-    final db = await getInstance.database;
-    allInfo = (await db.query(
-      DefaultModelFields.defaultTable,
-      where: "${DefaultModelFields.name} LIKE ?",
-      whereArgs: [query],
-    ))
-        .map((e) => DefaultModel.fromJson(e))
-        .toList();
-    return allInfo;
-  }
 }
