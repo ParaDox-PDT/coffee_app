@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paradoxs_coffee/ui/home/widgets/carousel_item.dart';
-import 'package:paradoxs_coffee/ui/home/widgets/search_text_field.dart';
+import 'package:paradoxs_coffee/ui/tab_box/home/widgets/carousel_item.dart';
+import 'package:paradoxs_coffee/ui/tab_box/home/widgets/search_text_field.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/extension.dart';
-import 'package:paradoxs_coffee/utils/icons.dart';
 import 'package:paradoxs_coffee/utils/images.dart';
-import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class CustomSliverAppBar extends StatefulWidget {
   const CustomSliverAppBar({super.key, required this.controller});

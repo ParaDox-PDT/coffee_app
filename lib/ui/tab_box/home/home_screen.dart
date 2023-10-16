@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:paradoxs_coffee/ui/home/widgets/category_items.dart';
-import 'package:paradoxs_coffee/ui/home/widgets/custom_sliver_app_bar.dart';
-import 'package:paradoxs_coffee/ui/home/widgets/custom_sliver_grid_item.dart';
+import 'package:paradoxs_coffee/ui/tab_box/home/widgets/category_items.dart';
+import 'package:paradoxs_coffee/ui/tab_box/home/widgets/custom_sliver_app_bar.dart';
+import 'package:paradoxs_coffee/ui/tab_box/home/widgets/custom_sliver_grid_item.dart';
+
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/images.dart';
 

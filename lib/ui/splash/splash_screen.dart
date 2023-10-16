@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
     if(StorageRepository.getBool("isStart")){
       if(context.mounted){
-        Navigator.pushReplacementNamed(context, RouteNames.homeScreen);
+        Navigator.pushReplacementNamed(context, RouteNames.tabBox);
       }
     }else{
       await StorageRepository.putBool("isStart", true);

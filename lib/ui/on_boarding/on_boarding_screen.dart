@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 GlobalButton(
                     text: "Get Started",
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, RouteNames.homeScreen);
+                      Navigator.pushReplacementNamed(context, RouteNames.tabBox);
                     }),
                 12.ph
               ],

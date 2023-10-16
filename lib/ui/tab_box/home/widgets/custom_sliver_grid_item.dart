@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paradoxs_coffee/ui/app_routes.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/extension.dart';
 import 'package:paradoxs_coffee/utils/icons.dart';
@@ -17,7 +18,9 @@ class CustomSliverGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZoomTapAnimation(
-      onTap: (){},
+      onTap: (){
+        Navigator.pushNamed(context, RouteNames.detailScreen);
+      },
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
