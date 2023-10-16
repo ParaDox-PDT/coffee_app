@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paradoxs_coffee/data/local/storage_repository/storage_repository.dart';
 import 'package:paradoxs_coffee/ui/app_routes.dart';
 import 'package:paradoxs_coffee/ui/widgets/global_button.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/extension.dart';
 import 'package:paradoxs_coffee/utils/images.dart';
-import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -52,6 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 GlobalButton(
                     text: "Get Started",
                     onTap: () {
+                      StorageRepository.putString("userId", DateTime.now().millisecondsSinceEpoch.toString());
                       Navigator.pushReplacementNamed(context, RouteNames.tabBox);
                     }),
                 12.ph
