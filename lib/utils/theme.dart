@@ -83,7 +83,7 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           fontFamily: "Sora"),
       //body
-      bodySmall: const TextStyle(
+      bodyLarge: const TextStyle(
           color: AppColors.passiveTextColor,
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -94,10 +94,10 @@ class AppTheme {
           letterSpacing: 0.14.sp,
           fontWeight: FontWeight.w400,
           fontFamily: "Poppins"),
-      bodyLarge: TextStyle(
-          color: AppColors.textColor,
+      bodySmall: TextStyle(
+          color: AppColors.c_9B9B9B,
           fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w400,
           fontFamily: "Sora"),
     ),
   );
