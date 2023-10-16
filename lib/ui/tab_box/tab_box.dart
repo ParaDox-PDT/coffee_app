@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paradoxs_coffee/ui/tab_box/home/home_screen.dart';
+import 'package:paradoxs_coffee/ui/tab_box/order/order_screen.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/icons.dart';
 
@@ -15,7 +16,7 @@ class _TabBoxState extends State<TabBox> {
   List screens = [
     HomeScreen(),
     HomeScreen(),
-    HomeScreen(),
+    OrderScreen()
   ];
 
   int initialPage = 0;
