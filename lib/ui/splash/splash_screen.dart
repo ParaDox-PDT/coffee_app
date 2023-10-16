@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paradoxs_coffee/data/local/storage_repository/storage_repository.dart';
 import 'package:paradoxs_coffee/ui/app_routes.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/images.dart';
@@ -14,10 +15,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   _init()async{
-    await Future.delayed(Duration(seconds: 2));
-    if(context.mounted){
-      Navigator.pushReplacementNamed(context, RouteNames.homeScreen);
+    await Future.delayed(const Duration(seconds: 2));
+    if(StorageRepository.getBool("isStart")){
+      if(context.mounted){
+        Navigator.pushReplacementNamed(context, RouteNames.homeScreen);
+      }
+    }else{
+      await StorageRepository.putBool("isStart", true);
+      if(context.mounted){
+        Navigator.pushReplacementNamed(context, RouteNames.onBoarding);
+      }
     }
+
   }
 
   @override

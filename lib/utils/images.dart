@@ -6,6 +6,8 @@ class AppImages{
   static const String milk="assets/images/milk.png";
   static const String onBoarding="assets/images/on_boarding.png";
   static const String promo="assets/images/promo.png";
+  static const String mood="assets/images/mood.png";
+  static const String delivery="assets/images/delivery.png";
   //json
   static const String loading="assets/images/loading.json";
   static const String loadingFBG="assets/images/loading_from_bg.json";

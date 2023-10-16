@@ -18,6 +18,7 @@ dependencies:
   change_app_package_name: ^1.1.0
   flutter_svg: ^2.0.6
   lottie: ^2.6.0
+  flutter_carousel_widget: ^2.1.0
   zoom_tap_animation: ^1.1.0
   flutter_screenutil: ^5.9.0
   easy_localization: ^3.0.2

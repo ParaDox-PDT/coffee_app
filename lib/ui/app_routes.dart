@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:paradoxs_coffee/ui/home/home_screen.dart';
+import 'package:paradoxs_coffee/ui/on_boarding/on_boarding_screen.dart';
 import 'package:paradoxs_coffee/ui/splash/splash_screen.dart';
 
 class RouteNames {
   static const String homeScreen = "/home";
+  static const String onBoarding = "/on_boarding";
   static const String splashScreen = "/";
 }
 
@@ -13,6 +15,10 @@ class AppRoutes {
       case RouteNames.homeScreen:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+      case RouteNames.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoardingScreen(),
         );
       case RouteNames.splashScreen:
         return MaterialPageRoute(

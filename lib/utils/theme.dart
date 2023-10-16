@@ -6,11 +6,11 @@ import 'colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.textColor,
-    appBarTheme:  AppBarTheme(
+    scaffoldBackgroundColor: AppColors.white,
+    appBarTheme: AppBarTheme(
       elevation: 0,
       backgroundColor: AppColors.textColor,
-      systemOverlayStyle:const SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
@@ -29,8 +29,9 @@ class AppTheme {
           fontWeight: FontWeight.w700,
           fontFamily: "Sora"),
       displaySmall: TextStyle(
-          color: AppColors.textColor,
-          fontSize: 36.sp,
+          color: AppColors.white,
+          fontSize: 34.sp,
+          letterSpacing: 0.33.sp,
           fontWeight: FontWeight.w600,
           fontFamily: "Sora"),
       //headline
@@ -56,7 +57,7 @@ class AppTheme {
           fontWeight: FontWeight.w700,
           fontFamily: "Sora"),
       titleMedium: TextStyle(
-          color: AppColors.textColor,
+          color: AppColors.white,
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
           fontFamily: "Sora"),
@@ -67,7 +68,7 @@ class AppTheme {
           fontFamily: "Sora"),
       //label
       labelLarge: TextStyle(
-          color: AppColors.textColor,
+          color: AppColors.white,
           fontSize: 14.sp,
           fontWeight: FontWeight.w600,
           fontFamily: "Sora"),
@@ -88,9 +89,10 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           fontFamily: "Sora"),
       bodyMedium: TextStyle(
-          color: AppColors.textColor,
+          color: AppColors.c_A9A9A9,
           fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
+          letterSpacing: 0.14.sp,
+          fontWeight: FontWeight.w400,
           fontFamily: "Poppins"),
       bodyLarge: TextStyle(
           color: AppColors.textColor,
