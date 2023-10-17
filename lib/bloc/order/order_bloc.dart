@@ -70,11 +70,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
 
   listenOrders(GetOrderEvent event,Emitter<OrderState> emit) async {
+    emit(OrderLoadingState());
     listenOrdersList(event.userId).listen((List<OrderModel> orders) {
       userOrders = orders;
       debugPrint("CURRENT USER ORDERS LENGTH:${userOrders.length}");
-      emit(OrderUpdateState());
-      emit(OrderInitial());
     });
+    emit(OrderUpdateState());
   }
 }

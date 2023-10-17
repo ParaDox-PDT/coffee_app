@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paradoxs_coffee/bloc/category/category_bloc.dart';
 import 'package:paradoxs_coffee/bloc/order/order_bloc.dart';
 import 'package:paradoxs_coffee/bloc/product/product_bloc.dart';
+import 'package:paradoxs_coffee/data/firebase_service/category_service.dart';
 import 'package:paradoxs_coffee/data/firebase_service/order_service.dart';
 import 'package:paradoxs_coffee/data/local/db/local_database.dart';
+import 'package:paradoxs_coffee/data/repositories/category_repo/category_repo.dart';
 import 'package:paradoxs_coffee/data/repositories/order_repo/order_repo.dart';
 import 'package:paradoxs_coffee/ui/app_routes.dart';
 import 'package:paradoxs_coffee/utils/theme.dart';
@@ -22,6 +24,7 @@ Future<void> main() async {
   runApp(
     App(
       orderService: OrderService(),
+      categoryService: CategoryService(),
     ),
   );
 }
@@ -29,10 +32,11 @@ Future<void> main() async {
 class App extends StatelessWidget {
   const App({
     super.key,
-    required this.orderService,
+    required this.orderService, required this.categoryService,
   });
 
   final OrderService orderService;
+  final CategoryService categoryService;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,9 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider(
           create: (context) => OrderRepo(orderService: orderService),
+        ),
+        RepositoryProvider(
+          create: (context) => CategoryRepo(categoryService: categoryService),
         )
       ],
       child: MultiBlocProvider(
@@ -53,7 +60,7 @@ class App extends StatelessWidget {
             create: (context) => ProductBloc(),
           ),
           BlocProvider(
-            create: (context) => CategoryBloc(),
+            create: (context) => CategoryBloc(categoryRepo: context.read<CategoryRepo>()),
           ),
         ],
         child: const MyApp(),

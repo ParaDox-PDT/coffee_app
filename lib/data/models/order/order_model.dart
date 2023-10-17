@@ -4,8 +4,8 @@ class OrderModel {
   final String createdAt;
   // final String orderId;
   final String phoneNumber;
-  final List<Map<String,dynamic>> products;
-  final double totalPrice;
+  final List<dynamic> products;
+  final num totalPrice;
   final String username;
   final String status;
   final String userId;
@@ -21,7 +21,7 @@ class OrderModel {
       required this.username,required this.status,required this.userId});
 
   OrderModel copWith({
-    double? totalPrice,
+    num? totalPrice,
     // String? orderId,
     String? status,
     List<Map<String,dynamic>>? products,
@@ -48,11 +48,11 @@ class OrderModel {
   factory OrderModel.fromJson(Map<String, dynamic> jsonData) {
     return OrderModel(
       username: jsonData['username'] as String? ?? '',
-      totalPrice: jsonData['totalPrice'] as double? ?? 0,
+      totalPrice: jsonData['totalPrice'] as num? ?? 0,
       // orderId: jsonData['orderId'] as String? ?? '',
       comment: jsonData['comment'] as String? ?? '',
       status: jsonData['status'] as String? ?? '',
-      products: jsonData['products'] as List<Map<String,dynamic>>? ?? [],
+      products: jsonData['products'] as List<dynamic>? ?? [],
       address: jsonData['address'] as String? ?? '',
       phoneNumber: jsonData['phoneNumber'] as String? ?? '',
       userId: jsonData['userId'] as String? ?? '',

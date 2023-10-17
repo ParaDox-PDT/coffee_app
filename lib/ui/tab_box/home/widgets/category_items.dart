@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paradoxs_coffee/bloc/category/category_bloc.dart';
 import 'package:paradoxs_coffee/bloc/product/product_bloc.dart';
 import 'package:paradoxs_coffee/data/models/category/category_model.dart';
+import 'package:paradoxs_coffee/ui/tab_box/order/widgets/order_text_field.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
@@ -17,11 +18,14 @@ class CategoryItems extends StatefulWidget {
 
 class _CategoryItemsState extends State<CategoryItems> {
   late String categoryId;
+  TextEditingController nameController = TextEditingController();
+
   @override
   void initState() {
-    categoryId=BlocProvider.of<ProductBloc>(context).categoryId;
+    categoryId = BlocProvider.of<ProductBloc>(context).categoryId;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -54,7 +58,9 @@ class _CategoryItemsState extends State<CategoryItems> {
                               onTap: () {
                                 setState(() {
                                   categoryId = '';
-                                  BlocProvider.of<ProductBloc>(context).add(ChangeCateIdProductsEvent(cateId: categoryId));
+                                  BlocProvider.of<ProductBloc>(context).add(
+                                      ChangeCateIdProductsEvent(
+                                          cateId: categoryId));
                                 });
                               },
                               child: Container(
@@ -93,7 +99,9 @@ class _CategoryItemsState extends State<CategoryItems> {
                                   setState(() {
                                     categoryId =
                                         snapshot.data![index].categoryId;
-                                    BlocProvider.of<ProductBloc>(context).add(ChangeCateIdProductsEvent(cateId: categoryId));
+                                    BlocProvider.of<ProductBloc>(context).add(
+                                        ChangeCateIdProductsEvent(
+                                            cateId: categoryId));
                                   });
                                 },
                                 child: Container(
@@ -127,7 +135,93 @@ class _CategoryItemsState extends State<CategoryItems> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
+                            ZoomTapAnimation(
+                              onTap: () {
+                                setState(() {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        actionsPadding:
+                                        EdgeInsets.symmetric(vertical: 0),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                if (nameController
+                                                    .text.isNotEmpty) {
+                                                  context
+                                                      .read<CategoryBloc>()
+                                                      .add(
+                                                    CategoryAddEvent(
+                                                      categoryModel:
+                                                      CategoryModel(
+                                                          categoryId:
+                                                          "",
+                                                          categoryName:
+                                                          nameController
+                                                              .text),
+                                                    ),
+                                                  );
+                                                  Navigator.pop(context);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            "Successfully Category added!!! "),
+                                                      ));
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          "Category name required"),
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                              child: const Text("Order"))
+                                        ],
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              OrderTextField(
+                                                  controller: nameController,
+                                                  hintText: "Category Name"),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                });
+                              },
+                              child: Container(
+                                height: 20.h,
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: 4.w,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w, vertical: 10.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  color: AppColors.white,
+                                  border: Border.all(
+                                      width: 1.w, color: AppColors.c_C67C4E),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "+",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.c_2F2D2C,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       )
