@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
-import 'package:paradoxs_coffee/utils/extension.dart';
 import 'package:paradoxs_coffee/utils/icons.dart';
 
 class DetailAppBar extends StatelessWidget implements PreferredSize{
@@ -35,14 +34,6 @@ class DetailAppBar extends StatelessWidget implements PreferredSize{
             .copyWith(color: AppColors.c_2F2D2C, fontSize: 18.sp),
       ),
       centerTitle: true,
-      actions: [
-        IconButton(
-          splashRadius: 20.r,
-          onPressed: () {},
-          icon: SvgPicture.asset(AppIcons.favorite),
-        ),
-        12.pw
-      ],
     );
   }
 

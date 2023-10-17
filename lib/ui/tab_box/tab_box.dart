@@ -15,7 +15,6 @@ class TabBox extends StatefulWidget {
 class _TabBoxState extends State<TabBox> {
   List screens = [
     HomeScreen(),
-    HomeScreen(),
     OrderScreen()
   ];
 
@@ -41,15 +40,6 @@ class _TabBoxState extends State<TabBox> {
             ),
             label: "",
             activeIcon: SvgPicture.asset(AppIcons.home),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppIcons.favorite),
-            label: "",
-            activeIcon: SvgPicture.asset(
-              AppIcons.favorite,
-              colorFilter:
-                  ColorFilter.mode(AppColors.c_C67C4E, BlendMode.srcIn),
-            ),
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppIcons.cart),

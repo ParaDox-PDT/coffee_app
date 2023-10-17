@@ -235,85 +235,97 @@ class _OrderScreenState extends State<OrderScreen> {
                 child: GlobalButton(
                     text: "Order",
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    if (phoneController.text.isNotEmpty &&
-                                        addressController.text.isNotEmpty) {
-                                      context
-                                          .read<OrderBloc>()
-                                          .add(AddOrderEvent(
-                                            orderModel: OrderModel(
-                                              createdAt:
-                                                  DateTime.now().toString(),
-                                              address: addressController.text,
-                                              comment: commentController.text,
-                                              phoneNumber: phoneController.text,
-                                              products: [
-                                                ...List.generate(
-                                                    products.length,
-                                                    (index) => {
-                                                          "productId":
-                                                              products[index]
-                                                                  .productId,
-                                                          "count":
-                                                              products[index]
-                                                                  .count
-                                                        })
-                                              ],
-                                              totalPrice: sum,
-                                              username: usernameController.text,
-                                              status: FormStatusOrder.pure,
-                                              userId:
-                                                  StorageRepository.getString(
-                                                      "userId"),
-                                            ),
-                                          ));
-                                      Navigator.pop(context);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content: Text(
-                                            "Successfully Ordered!!!Thank You "),
-                                      ));
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
+                      if (products.isNotEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              actionsPadding: EdgeInsets.symmetric(vertical: 0),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      if (phoneController.text.isNotEmpty &&
+                                          addressController.text.isNotEmpty) {
+                                        context
+                                            .read<OrderBloc>()
+                                            .add(AddOrderEvent(
+                                              orderModel: OrderModel(
+                                                createdAt:
+                                                    DateTime.now().toString(),
+                                                address: addressController.text,
+                                                comment: commentController.text,
+                                                phoneNumber:
+                                                    phoneController.text,
+                                                products: [
+                                                  ...List.generate(
+                                                      products.length,
+                                                      (index) => {
+                                                            "productId":
+                                                                products[index]
+                                                                    .productId,
+                                                            "count":
+                                                                products[index]
+                                                                    .count
+                                                          })
+                                                ],
+                                                totalPrice: sum,
+                                                username:
+                                                    usernameController.text,
+                                                status: FormStatusOrder.pure,
+                                                userId:
+                                                    StorageRepository.getString(
+                                                        "userId"),
+                                              ),
+                                            ));
+                                        Navigator.pop(context);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
                                           content: Text(
-                                              "Address and Phone number required"),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: const Text("Order"))
-                            ],
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                OrderTextField(
-                                    controller: usernameController,
-                                    hintText: "User name"),
-                                12.ph,
-                                OrderTextField(
-                                    controller: phoneController,
-                                    hintText: "Phone number"),
-                                12.ph,
-                                OrderTextField(
-                                    controller: addressController,
-                                    hintText: "Address"),
-                                12.ph,
-                                OrderTextField(
-                                    controller: commentController,
-                                    hintText: "Comment"),
+                                              "Successfully Ordered!!!Thank You "),
+                                        ));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                "Address and Phone number required"),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: const Text("Order"))
                               ],
-                            ),
-                          );
-                        },
-                      );
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    OrderTextField(
+                                        controller: usernameController,
+                                        hintText: "User name"),
+                                    12.ph,
+                                    OrderTextField(
+                                        controller: phoneController,
+                                        hintText: "Phone number"),
+                                    12.ph,
+                                    OrderTextField(
+                                        controller: addressController,
+                                        hintText: "Address"),
+                                    12.ph,
+                                    OrderTextField(
+                                        controller: commentController,
+                                        hintText: "Comment")
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Cart is Empty! Please Buy Coffee"),
+                        ));
+                      }
                     }),
               )
             ],
