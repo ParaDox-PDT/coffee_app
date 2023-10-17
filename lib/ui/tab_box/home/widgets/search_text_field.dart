@@ -44,13 +44,28 @@ class _SearchTextFieldState extends State<SearchTextField> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.w,vertical: 6.h),
-
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 0.w, vertical: 6.h),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextButton(child: const Text("Max Price",style: TextStyle(color: Colors.black)),onPressed: (){Navigator.pop(context);},),
-                    TextButton(child: const Text("Min Price",style: TextStyle(color: Colors.black)),onPressed: (){Navigator.pop(context);},),
+                    TextButton(
+                      child: const Text("Max Price",
+                          style: TextStyle(color: Colors.black)),
+                      onPressed: () {
+                        context.read<ProductBloc>().add(FilterListEvent(filterNumber: 1));
+                        Navigator.pop(context);
+
+                      },
+                    ),
+                    TextButton(
+                      child: const Text("Min Price",
+                          style: TextStyle(color: Colors.black)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        context.read<ProductBloc>().add(FilterListEvent(filterNumber: 2));
+                      },
+                    ),
                   ],
                 ),
               ),

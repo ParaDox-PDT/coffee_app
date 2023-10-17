@@ -70,3 +70,11 @@ class UpdateEvent extends ProductEvent{
   @override
   List<Object?> get props => [];
 }
+
+class FilterListEvent extends ProductEvent{
+  final int filterNumber;
+  FilterListEvent({required this.filterNumber});
+
+  @override
+  List<Object?> get props => [filterNumber];
+}

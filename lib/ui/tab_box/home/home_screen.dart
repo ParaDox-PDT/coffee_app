@@ -43,15 +43,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 stream: context.read<ProductBloc>().getProducts(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<ProductModel> products=[];
-                    if(searchController.text.isNotEmpty){
+                    List<ProductModel> products = [];
+                    if (searchController.text.isNotEmpty) {
                       for (var element in snapshot.data!) {
-                        if(element.name.toLowerCase().contains(searchController.text.toLowerCase())){
+                        if (element.name
+                            .toLowerCase()
+                            .contains(searchController.text.toLowerCase())) {
                           products.add(element);
                         }
                       }
-                    }else{
-                      products=snapshot.data!;
+                      if (context.read<ProductBloc>().filterList == 2) {
+                        products.sort(
+                          (a, b) => a.price.compareTo(b.price),
+                        );
+                      } else if (context.read<ProductBloc>().filterList == 1) {
+                        products.sort(
+                          (b, a) => a.price.compareTo(b.price),
+                        );
+                      }
+                    } else {
+                      products = snapshot.data!;
+                      if (context.read<ProductBloc>().filterList == 2) {
+                        products.sort(
+                          (a, b) => a.price.compareTo(b.price),
+                        );
+                      } else if (context.read<ProductBloc>().filterList == 1) {
+                        products.sort(
+                          (b, a) => a.price.compareTo(b.price),
+                        );
+                      }
                     }
                     return products.isNotEmpty
                         ? SliverPadding(
@@ -67,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               delegate: SliverChildBuilderDelegate(
                                 (BuildContext context, int index) {
-                                  ProductModel productModel =
-                                  products[index];
+                                  ProductModel productModel = products[index];
                                   return CustomSliverGridItem(
                                       productModel: productModel);
                                 },

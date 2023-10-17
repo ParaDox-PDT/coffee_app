@@ -23,12 +23,20 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<CheckProductEvent>(checkProduct);
     on<ChangeCateIdProductsEvent>(changeCategoryId);
     on<UpdateEvent>(update);
+    on<FilterListEvent>(filter);
   }
 
   List<ProductModelForSql> productsSql=[];
   String searchText='';
   List<ProductModel> products=[];
   String categoryId = "";
+  int filterList=0;
+
+  filter(FilterListEvent event, Emitter<ProductState> emit){
+    filterList=event.filterNumber;
+    emit(ProductUpdateState());
+    emit(ProductInitial());
+  }
 
   changeCategoryId(ChangeCateIdProductsEvent event, Emitter<ProductState> emit){
     categoryId=event.cateId;
