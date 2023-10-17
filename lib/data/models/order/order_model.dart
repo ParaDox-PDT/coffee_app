@@ -2,7 +2,7 @@ class OrderModel {
   final String address;
   final String comment;
   final String createdAt;
-  final String orderId;
+  // final String orderId;
   final String phoneNumber;
   final List<Map<String,dynamic>> products;
   final double totalPrice;
@@ -14,7 +14,7 @@ class OrderModel {
       {required this.createdAt,
       required this.address,
       required this.comment,
-      required this.orderId,
+      // required this.orderId,
       required this.phoneNumber,
       required this.products,
       required this.totalPrice,
@@ -22,7 +22,7 @@ class OrderModel {
 
   OrderModel copWith({
     double? totalPrice,
-    String? orderId,
+    // String? orderId,
     String? status,
     List<Map<String,dynamic>>? products,
     String? username,
@@ -35,7 +35,7 @@ class OrderModel {
       OrderModel(
         products: products ?? this.products,
         totalPrice: totalPrice ?? this.totalPrice,
-        orderId: orderId ?? this.orderId,
+        // orderId: orderId ?? this.orderId,
         status: status ?? this.status,
         username: username ?? this.username,
         comment: comment ?? this.comment,
@@ -49,7 +49,7 @@ class OrderModel {
     return OrderModel(
       username: jsonData['username'] as String? ?? '',
       totalPrice: jsonData['totalPrice'] as double? ?? 0,
-      orderId: jsonData['orderId'] as String? ?? '',
+      // orderId: jsonData['orderId'] as String? ?? '',
       comment: jsonData['comment'] as String? ?? '',
       status: jsonData['status'] as String? ?? '',
       products: jsonData['products'] as List<Map<String,dynamic>>? ?? [],
@@ -65,7 +65,7 @@ class OrderModel {
       'username': username,
       'status': status,
       'totalPrice': totalPrice,
-      'orderId': orderId,
+      // 'orderId': orderId,
       'userId': userId,
       'comment': comment,
       'products': products,
@@ -82,7 +82,6 @@ class OrderModel {
       totalPrice: $totalPrice,
       userId: $userId,
       status: $status,
-      orderId: $orderId,
       comment: $comment,
       productsId: $products,
       address: $address,

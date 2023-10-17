@@ -37,7 +37,7 @@ class LocalDatabase {
     await db.execute('''
     CREATE TABLE ${ProductModelFields.tableName} (
     ${ProductModelFields.id} $idType,
-    ${ProductModelFields.productId} $intType,
+    ${ProductModelFields.productId} $textType,
     ${ProductModelFields.price} $intType,
     ${ProductModelFields.count} $intType,
     ${ProductModelFields.name} $textType,
@@ -50,7 +50,7 @@ class LocalDatabase {
     await db.execute('''
     CREATE TABLE ${ProductModelFields.favorites} (
     ${ProductModelFields.id} $idType,
-    ${ProductModelFields.productId} $intType,
+    ${ProductModelFields.productId} $textType,
     ${ProductModelFields.price} $intType,
     ${ProductModelFields.count} $intType,
     ${ProductModelFields.name} $textType,
@@ -80,12 +80,12 @@ class LocalDatabase {
     return allProducts;
   }
 
-  static Future<bool> checkProduct({required int id})async{
+  static Future<bool> checkProduct({required String productId})async{
     final db = await getInstance.database;
     List<Map<String, dynamic>> result = await db.query(
       ProductModelFields.tableName,
       where: '${ProductModelFields.productId} = ? ',
-      whereArgs: [id],
+      whereArgs: [productId],
     );
     return result.isNotEmpty;
   }
@@ -93,20 +93,20 @@ class LocalDatabase {
   static incrementProduct({required int id}) async {
     final db = await getInstance.database;
     await db.execute(
-        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} + 1 WHERE ${ProductModelFields.productId} = $id;");
+        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} + 1 WHERE ${ProductModelFields.id} = $id;");
   }
 
   static decrementProduct({required int id}) async {
     final db = await getInstance.database;
     await db.execute(
-        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} - 1 WHERE ${ProductModelFields.productId} = $id;");
+        "UPDATE ${ProductModelFields.tableName} SET ${ProductModelFields.count} = ${ProductModelFields.count} - 1 WHERE ${ProductModelFields.id} = $id;");
   }
 
   static deleteProduct(int id) async {
     final db = await getInstance.database;
     db.delete(
       ProductModelFields.tableName,
-      where: "${ProductModelFields.productId} = ?",
+      where: "${ProductModelFields.id} = ?",
       whereArgs: [id],
     );
   }

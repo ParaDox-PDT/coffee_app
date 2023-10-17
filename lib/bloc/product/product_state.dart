@@ -22,6 +22,11 @@ class ProductLoadingState extends ProductState{
   List<Object?> get props => [];
 }
 
+class ProductCheckSumState extends ProductState{
+  @override
+  List<Object?> get props => [];
+}
+
 class ProductErrorState extends ProductState{
   final String errorText;
   ProductErrorState({required this.errorText});

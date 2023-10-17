@@ -40,10 +40,10 @@ class DecrementProductEvent extends ProductEvent{
 }
 
 class CheckProductEvent extends ProductEvent{
-  final int id;
-  CheckProductEvent({required this.id});
+  final String productId;
+  CheckProductEvent({required this.productId});
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [productId];
 }
 
 

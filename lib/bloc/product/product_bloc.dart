@@ -31,6 +31,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   List<ProductModel> products=[];
   String categoryId = "";
   int filterList=0;
+  bool check=false;
 
   filter(FilterListEvent event, Emitter<ProductState> emit){
     filterList=event.filterNumber;
@@ -79,24 +80,26 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }catch(e){
       emit(ProductErrorState(errorText: e.toString()));
     }
+    emit(ProductCheckSumState());
     emit(ProductInitial());
   }
 
   Future<void> incrementProduct(IncrementProductEvent event,Emitter<ProductState> emit)async{
     try{
       emit(ProductLoadingState());
-      await LocalDatabase.decrementProduct(id: event.id);
+      await LocalDatabase.incrementProduct(id:event.id);
       emit(ProductUpdateState());
     }catch(e){
       emit(ProductErrorState(errorText: e.toString()));
     }
+    emit(ProductCheckSumState());
     emit(ProductInitial());
   }
 
   Future<void> checkProduct(CheckProductEvent event,Emitter<ProductState> emit)async{
     try{
       emit(ProductLoadingState());
-      await LocalDatabase.checkProduct(id: event.id);
+      check = await LocalDatabase.checkProduct(productId:event.productId);
       emit(ProductUpdateState());
     }catch(e){
       emit(ProductErrorState(errorText: e.toString()));
