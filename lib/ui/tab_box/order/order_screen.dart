@@ -240,7 +240,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              actionsPadding: EdgeInsets.symmetric(vertical: 0),
+                              actionsPadding: const EdgeInsets.symmetric(vertical: 0),
                               actions: [
                                 TextButton(
                                     onPressed: () {
