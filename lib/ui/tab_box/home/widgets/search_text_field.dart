@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paradoxs_coffee/bloc/product/product_bloc.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/icons.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
@@ -21,6 +23,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.search,
       controller: widget.controller,
+      onChanged: (value) {
+        context.read<ProductBloc>().add(UpdateEvent());
+      },
       decoration: InputDecoration(
         hintText: "Search coffee",
         hintStyle: Theme.of(context).textTheme.bodyMedium,

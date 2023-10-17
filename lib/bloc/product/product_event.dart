@@ -4,9 +4,6 @@ part of 'product_bloc.dart';
 abstract class ProductEvent extends Equatable{}
 
 class GetProductsEvent extends ProductEvent{
-  final String categoryId;
-  GetProductsEvent({required this.categoryId});
-
   @override
   List<Object?> get props => [];
 
@@ -57,6 +54,19 @@ class GetAllProductsEvent extends ProductEvent{
 }
 
 class DeleteAllProductsEvent extends ProductEvent{
+  @override
+  List<Object?> get props => [];
+}
+
+
+class ChangeCateIdProductsEvent extends ProductEvent{
+  final String cateId;
+  ChangeCateIdProductsEvent({required this.cateId});
+  @override
+  List<Object?> get props => [cateId];
+}
+
+class UpdateEvent extends ProductEvent{
   @override
   List<Object?> get props => [];
 }

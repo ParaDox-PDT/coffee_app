@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paradoxs_coffee/data/local/db/local_database.dart';
 import 'package:paradoxs_coffee/data/models/product/product_model.dart';
@@ -12,7 +13,7 @@ part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(ProductInitial()) {
-    on<GetProductsEvent>(getProducts);
+    on<GetProductsEvent>(listenProducts);
     on<GetAllProductsEvent>(getAllProducts);
     on<AddProductEvent>(addProduct);
     on<DeleteProductEvent>(deleteProduct);
@@ -20,9 +21,25 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<DecrementProductEvent>(decrementProduct);
     on<IncrementProductEvent>(incrementProduct);
     on<CheckProductEvent>(checkProduct);
+    on<ChangeCateIdProductsEvent>(changeCategoryId);
+    on<UpdateEvent>(update);
   }
 
-  List<ProductModelForSql> products=[];
+  List<ProductModelForSql> productsSql=[];
+  String searchText='';
+  List<ProductModel> products=[];
+  String categoryId = "";
+
+  changeCategoryId(ChangeCateIdProductsEvent event, Emitter<ProductState> emit){
+    categoryId=event.cateId;
+    emit(ProductUpdateState());
+    emit(ProductInitial());
+  }
+
+  update(UpdateEvent event, Emitter<ProductState> emit){
+    emit(ProductUpdateState());
+    emit(ProductInitial());
+  }
 
   Future<void> addProduct(AddProductEvent event,Emitter<ProductState> emit)async{
     try{
@@ -82,7 +99,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   Future<void> getAllProducts(GetAllProductsEvent event,Emitter<ProductState> emit)async{
     try{
       emit(ProductLoadingState());
-      products=await LocalDatabase.getAllProducts();
+      productsSql=await LocalDatabase.getAllProducts();
       emit(ProductUpdateState());
     }catch(e){
       emit(ProductErrorState(errorText: e.toString()));
@@ -101,8 +118,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(ProductInitial());
   }
 
-  Stream<List<ProductModel>> getProducts(GetProductsEvent event, Emitter<ProductState> emit) async* {
-    if (event.categoryId.isEmpty) {
+  Stream<List<ProductModel>> getProducts() async* {
+    if (categoryId.isEmpty) {
       yield* FirebaseFirestore.instance.collection("products").snapshots().map(
             (event1) => event1.docs
             .map((doc) => ProductModel.fromJson(doc.data()))
@@ -111,7 +128,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     } else {
       yield* FirebaseFirestore.instance
           .collection("products")
-          .where("categoryId", isEqualTo:event.categoryId)
+          .where("categoryId", isEqualTo:categoryId)
           .snapshots()
           .map(
             (event1) => event1.docs
@@ -119,6 +136,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             .toList(),
       );
     }
+  }
+
+  listenProducts(GetProductsEvent event, Emitter<ProductState> emit)async{
+    emit(ProductLoadingState());
+    getProducts().listen((List<ProductModel> product) {
+      products = product;
+      debugPrint("CURRENT USER ORDERS LENGTH:${products.length}");
+    });
+    emit(ProductUpdateState());
   }
 
 }

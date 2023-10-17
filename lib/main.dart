@@ -15,9 +15,9 @@ import 'data/local/storage_repository/storage_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await StorageRepository.getInstance();
   LocalDatabase.getInstance;
-  await Firebase.initializeApp();
 
   runApp(
     App(

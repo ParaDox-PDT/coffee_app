@@ -1,13 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paradoxs_coffee/data/models/product/product_model.dart';
 import 'package:paradoxs_coffee/ui/tab_box/home/subscreens/widgets/detail_app_bar.dart';
 import 'package:paradoxs_coffee/utils/colors.dart';
 import 'package:paradoxs_coffee/utils/extension.dart';
-import 'package:paradoxs_coffee/utils/images.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.productModel});
+
+  final ProductModel productModel;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -26,24 +29,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               physics: const BouncingScrollPhysics(),
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
-                  child: Image.asset(
-                    AppImages.cappucino,
-                    height: 226.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.productModel.photoUrl,
+                      height: 226.h,
+                      fit: BoxFit.cover,
+                    )),
                 20.ph,
                 Text(
-                  "Cappucino",
+                  widget.productModel.name,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
                       .copyWith(color: AppColors.c_2F2D2C, fontSize: 20.sp),
                 ),
-                8.ph,
-                Text("with Chocolate",
-                    style: Theme.of(context).textTheme.bodySmall),
                 20.ph,
                 Divider(
                   thickness: 1.sp,
@@ -58,7 +57,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 12.ph,
                 Text(
-                  "A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the fo.. Read More",
+                  widget.productModel.description,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -69,7 +68,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 12.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
             child: Row(
               children: [
                 RichText(
@@ -81,7 +80,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         .copyWith(fontSize: 16.sp),
                     children: [
                       TextSpan(
-                          text: "\$ 4.53",
+                          text: "\$ ${widget.productModel.price}",
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -93,9 +92,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 40.pw,
                 Expanded(
                   child: ZoomTapAnimation(
-                    onTap: (){},
+                    onTap: () {},
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 22.h,),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 22.h,
+                      ),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.r),
                           color: AppColors.c_C67C4E),

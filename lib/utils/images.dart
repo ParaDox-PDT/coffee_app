@@ -12,5 +12,6 @@ class AppImages{
   static const String loading="assets/images/loading.json";
   static const String loadingFBG="assets/images/loading_from_bg.json";
   static const String splash="assets/images/splash.json";
+  static const String empty="assets/images/empty.json";
 
 }

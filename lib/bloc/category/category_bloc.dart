@@ -8,12 +8,10 @@ part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  CategoryBloc() : super(CategoryInitial()) {
-    on<CategoryGetEvent>(getCategories);
-  }
+  CategoryBloc() : super(CategoryInitial());
 
-  Stream<List<CategoryModel>> getCategories(CategoryGetEvent event, Emitter<CategoryState> emit) =>
-      FirebaseFirestore.instance.collection("categories").snapshots().map(
+  Stream<List<CategoryModel>> getCategories() =>
+      FirebaseFirestore.instance.collection("category").snapshots().map(
             (event1) => event1.docs
             .map((doc) => CategoryModel.fromJson(doc.data()))
             .toList(),

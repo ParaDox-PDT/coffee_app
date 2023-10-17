@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paradoxs_coffee/data/models/product/product_model.dart';
 
 import 'package:paradoxs_coffee/ui/on_boarding/on_boarding_screen.dart';
 import 'package:paradoxs_coffee/ui/splash/splash_screen.dart';
@@ -23,7 +24,7 @@ class AppRoutes {
         );
       case RouteNames.detailScreen:
         return MaterialPageRoute(
-          builder: (context) => const ProductDetailScreen(),
+          builder: (context) =>  ProductDetailScreen(productModel: settings.arguments as ProductModel,),
         );
       case RouteNames.tabBox:
         return MaterialPageRoute(
