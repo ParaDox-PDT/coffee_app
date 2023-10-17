@@ -127,7 +127,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                         description:
                                             widget.productModel.description,
                                         name: widget.productModel.name,
-                                        price: widget.productModel.price,
+                                        price: widget.productModel.price.toDouble(),
                                         productId:
                                             widget.productModel.productId),
                                   ),

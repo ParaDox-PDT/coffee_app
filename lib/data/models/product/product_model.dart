@@ -3,7 +3,7 @@ class ProductModel {
   final String name;
   final String photoUrl;
   final String description;
-  final double price;
+  final num price;
   final String productId;
 
   ProductModel(
@@ -15,7 +15,7 @@ class ProductModel {
       required this.productId,});
 
   ProductModel copyWith({
-    double? price,
+    num? price,
     String? photoUrl,
     String? categoryId,
     String? productId,
@@ -35,7 +35,7 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
     return ProductModel(
-      price: jsonData['price'] as double? ?? 0,
+      price: jsonData['price'] as num? ?? 0,
       photoUrl: (jsonData['photoUrl'] as String? ?? ""),
       categoryId: jsonData['categoryId'] as String? ?? '',
       productId: jsonData['productId'] as String? ?? '',
